@@ -1,20 +1,33 @@
 package com.example.calc_test;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.google.android.material.button.MaterialButton;
 import org.mozilla.javascript.Context;
 import org.mozilla.javascript.Scriptable;
+
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
+
+
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     TextView resultTv, solutionTv;
     MaterialButton buttonAC, butonc, buttonClose, buttonOpen, buttonDot;
     MaterialButton buttonPlus, buttonMinus, buttonMultiply, buttonDivide, buttonEqual;
     MaterialButton button0,button1,button2,button3,button4,button5,button6,button7,button8,button9;
+    Button btn_his;
+    String history="";
 
 
     @Override
@@ -26,6 +39,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         } else {
             setContentView(R.layout.activity_main);
         }
+
+        btn_his=findViewById(R.id.btn_his);
+        btn_his.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String msg=history;
+                Intent intent =new Intent(getApplicationContext(), Act_history.class );
+                intent.putExtra("username", msg);
+                startActivity(intent);
+            }
+        });
+
         resultTv = findViewById(R.id.result);
         solutionTv = findViewById(R.id.solution);
         assignId(butonc,R.id.button_c);
@@ -49,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         assignId(button8,R.id.button_8);
         assignId(button9,R.id.button_9);
 
+
     }
     void assignId(MaterialButton btn,int id){
         btn=findViewById(id);
@@ -60,12 +86,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         MaterialButton button = (MaterialButton) view;
         String buttonText = button.getText().toString();
         String dataCalculate = solutionTv.getText().toString();
+        //String msg=solutionTv.getText().toString();
         if(buttonText.equals("AC")){
             solutionTv.setText("");
             resultTv.setText("0");
             return;
         }
         if(buttonText.equals("=")){
+            history+=solutionTv.getText().toString()+"="+resultTv.getText()+"_";
             solutionTv.setText(resultTv.getText());
             return;
         }
@@ -99,4 +127,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         {  return "Err";}
 
     }
+    @Override
+    protected  void onRestoreInstanceState( Bundle savedInstanceState){
+        super.onRestoreInstanceState((savedInstanceState));
+        if(savedInstanceState.get("Count")!=null){
+            solutionTv.setText(savedInstanceState.get("Count").toString());
+        }
+        if(savedInstanceState.get("Count2")!=null){
+            resultTv.setText(savedInstanceState.get("Count2").toString());
+        }
+    }
+    public void onSaveInstanceState(Bundle outState){
+        super.onSaveInstanceState(outState);
+
+        outState.putString("Count",
+                String.valueOf(solutionTv.getText()));
+        outState.putString("Count2",
+                String.valueOf(resultTv.getText()));
+    }
+
 }

@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+
+
     <TextView
         android:id="@+id/solution"
         android:layout_width="match_parent"
@@ -15,14 +17,14 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:text="0"
+        android:text=""
         android:textAlignment="textEnd"
         android:textColor="@color/black"
         android:textSize="40dp" />
 
     <TextView
         android:id="@+id/result"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/button_layout"
         android:layout_marginStart="16dp"
@@ -32,7 +34,10 @@
         android:text="0"
         android:textAlignment="textEnd"
         android:textColor="@color/black"
-        android:textSize="64dp" />
+        android:textSize="64dp"
+        />
+
+
     <LinearLayout
         android:id="@+id/button_layout"
         android:layout_width="match_parent"
@@ -297,6 +302,16 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_his"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/solution"
+        android:layout_alignBottom="@+id/solution"
+        android:layout_marginEnd="11dp"
+        android:layout_marginBottom="-3dp"
+        android:text="History" />
 
 
 </RelativeLayout>

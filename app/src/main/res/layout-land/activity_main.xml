@@ -16,12 +16,22 @@ tools:context=".MainActivity">
     android:layout_marginTop="46dp"
     android:layout_marginEnd="16dp"
     android:layout_marginBottom="16dp"
-    android:text="0"
+    android:text=""
     android:textAlignment="textEnd"
     android:textColor="@color/black"
     android:textSize="40dp" />
 
- <TextView
+    <Button
+        android:id="@+id/btn_his"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/solution"
+        android:layout_marginStart="151dp"
+        android:layout_marginBottom="0dp"
+        android:layout_toEndOf="@+id/result"
+        android:text="History" />
+
+    <TextView
      android:id="@+id/result"
      android:layout_width="wrap_content"
      android:layout_height="wrap_content"
